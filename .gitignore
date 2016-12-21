@@ -27,3 +27,4 @@
 *.exe
 *.out
 *.app
+/Snake_cpp/Snake_cpp.VC.VC.opendb
