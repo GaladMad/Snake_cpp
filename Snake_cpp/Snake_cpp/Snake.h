@@ -6,7 +6,7 @@ using namespace std;
 
 class Snake
 {
-	Block segments[100];
+	Block segments[100]; //table with segents of snake
 	string snakeSign = " o";
 	int snakeLength;
 
@@ -18,7 +18,8 @@ public:
 		West
 	};
 private:
-	course snakeCourse;
+	course snakeCourse; //course wher snake move
+	void moveBodyOfSnake();
 
 public:
 	Snake();
@@ -27,6 +28,8 @@ public:
 	course getCourse();
 	int getLength();
 	Block* getSegments();
+	bool ifAlive();
+	void moveSnake();
 	~Snake();
 };
 
