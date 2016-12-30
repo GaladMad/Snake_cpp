@@ -3,14 +3,21 @@
 
 Food::Food(Scene Background)
 {
-	//x = rand() % (Background.getHeight);
-	//y = rand() % (Background.getWidth);
-	setX(rand() % 20);
-	setY(rand() % 20);
+	maxX = Background.getHeight();
+	maxY = Background.getWidth();
+	setX(rand() % maxX);
+	setY(rand() % maxY);
 }
 
 string Food::getSign() {
 	return foodSign;
+}
+
+void Food::randLocation()
+{
+	//srand(static_cast<unsigned int> (time(NULL)));
+	setX(rand() % maxX);
+	setY(rand() % maxY);
 }
 
 

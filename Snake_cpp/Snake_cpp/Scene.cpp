@@ -34,7 +34,7 @@ void Scene::updateScene(Food &myFood, Snake &mySnake) {
 	}
 
 	state[tab[0][0]][tab[0][1]] = fSign;
-	//state[tab[1][0]][tab[1][1]] = sSign;
+
 	for (int i = 0; i < mySnake.getLength(); i++) {
 		state[tab[i+1][0]][tab[i+1][1]] = sSign;
 	}

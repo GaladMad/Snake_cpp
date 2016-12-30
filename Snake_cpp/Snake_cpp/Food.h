@@ -8,12 +8,12 @@ using namespace std;
 
 class Food : public Block
 {
-	int x;
-	int y;
+	int maxX, maxY;
 	string foodSign=" x";
 public:
 	Food(Scene Background);
 	string getSign();
+	void randLocation();
 	~Food();
 };
 

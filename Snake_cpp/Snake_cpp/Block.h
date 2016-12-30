@@ -13,7 +13,7 @@ public:
 	Block(int x, int y);
 	int getX();
 	int getY();
-	virtual string getSign();
+	virtual string getSign(); //every single block (food or segment of snake) have got other signature
 	void setX(int x);
 	void setY(int y);
 	~Block();
