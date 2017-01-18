@@ -48,6 +48,11 @@ int Scene::getHeight() {
 	return y;
 }
 
+int Scene::getArea()
+{
+	return x*y;
+}
+
 Scene::~Scene()
 {
 	system("cls");

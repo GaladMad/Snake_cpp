@@ -11,7 +11,8 @@ class Scene;
 
 class Snake
 {
-	Block segments[100]; //table with segents of snake
+	Block segments[100];
+	//Block *segments;// [100]; //table with segents of snake
 	string snakeSign = " o";
 	int snakeLength;
 	Block lastSegment;
@@ -22,10 +23,12 @@ public:
 	{	North=0,
 		South,
 		East,
-		West
+		West,
+		Other
 	};
 private:
 	course snakeCourse; //course wher snake move
+	course snakeLastCourse;
 	void moveBodyOfSnake();
 
 public:
@@ -36,7 +39,7 @@ public:
 	int getLength();
 	Block* getSegments();
 	bool ifAlive();
-	void eatAndGrow(Food myFood);
+	bool eatAndGrow(Food myFood);
 	void moveSnake();
 	~Snake();
 };

@@ -5,6 +5,8 @@ Snake::Snake(Scene Background)
 	maxX = Background.getHeight();
 	maxY = Background.getWidth();
 
+	//Block *segments = new Block[maxX*maxY];
+
 	Block segment0(0, 2);
 	Block segment1(0, 1);
 	Block segment2(0, 0);
@@ -13,11 +15,8 @@ Snake::Snake(Scene Background)
 	segments[1] = segment1;
 	segments[2] = segment2;
 
-	//for (int i = 3; i <= 100; i++) {
-	//	segments[i] = NULL;
-	//}
-
 	snakeCourse = East;
+	snakeLastCourse = East;
 	snakeLength = 3;
 }
 
@@ -58,15 +57,15 @@ bool Snake::ifAlive()
 	return alive;
 }
 
-void Snake::eatAndGrow(Food myFood)
+bool Snake::eatAndGrow(Food myFood)
 {
 	if ((segments[0].getX() == myFood.getX()) && (segments[0].getY() == myFood.getY())) {
-		myFood.randLocation(); //NOT WORKING!!!
-		//cout << "rand food bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb" << endl;
 		snakeLength++;
 		segments[snakeLength - 1].setX(lastSegment.getX());//add last segmet to segments
 		segments[snakeLength - 1].setY(lastSegment.getY());
+		return true;
 	}
+	else { return false; }
 }
 
 void Snake::moveBodyOfSnake() {
@@ -83,49 +82,65 @@ void Snake::moveSnake()
 {
 	switch (snakeCourse){
 	case North: //if course is set to up, snake move to up
-		moveBodyOfSnake();
+		if (snakeLastCourse != South)
+		{
+			moveBodyOfSnake();
 
-		if (segments[0].getX()==0) { //if snake will go outside of scene, he go to down of scene
-			segments[0].setX(maxX-1);
+			if (segments[0].getX() == 0) { //if snake will go outside of scene, he go to down of scene
+				segments[0].setX(maxX - 1);
+			}
+			else {
+				segments[0].setX(segments[0].getX() - 1);
+			}
+			snakeLastCourse = North;
 		}
-		else {
-			segments[0].setX(segments[0].getX() - 1);
-		}
-
 		break;
 	case South: //if course is set to down, snake move to down
-		moveBodyOfSnake();
+		if (snakeLastCourse != North)
+		{
+			moveBodyOfSnake();
 
-		if (segments[0].getX() == (maxX-1)) { //if snake will go outside of scene, he go to up of scene
-			segments[0].setX(0);
-		}
-		else {
-			segments[0].setX(segments[0].getX() + 1);
+			if (segments[0].getX() == (maxX - 1)) { //if snake will go outside of scene, he go to up of scene
+				segments[0].setX(0);
+			}
+			else {
+				segments[0].setX(segments[0].getX() + 1);
+			}
+			snakeLastCourse = South;
 		}
 		break;
 
 	case East: //if course is set to left, snake move to left
-		moveBodyOfSnake();
+		if (snakeLastCourse != West)
+		{
+			moveBodyOfSnake();
 
-		if (segments[0].getY() == (maxX - 1)) { //if snake will go outside of scene, he go to right of scene
-			segments[0].setY(0);
-		}
-		else {
-			segments[0].setY(segments[0].getY() + 1);
+			if (segments[0].getY() == (maxX - 1)) { //if snake will go outside of scene, he go to right of scene
+				segments[0].setY(0);
+			}
+			else {
+				segments[0].setY(segments[0].getY() + 1);
+			}
+			snakeLastCourse = East;
 		}
 		break;
 
 	case West: //if course is set to right, snake move to right
-		moveBodyOfSnake();
+		if (snakeLastCourse != East)
+		{
+			moveBodyOfSnake();
 
-		if (segments[0].getY() == 0) { //if snake will go outside of scene, he go to left of scene
-			segments[0].setY(maxX-1);
-		}
-		else {
-			segments[0].setY(segments[0].getY() - 1);
+			if (segments[0].getY() == 0) { //if snake will go outside of scene, he go to left of scene
+				segments[0].setY(maxX - 1);
+			}
+			else {
+				segments[0].setY(segments[0].getY() - 1);
+			}
+			snakeLastCourse = West;
 		}
 		break;
-	default:
+
+	default: //if course is other, do nothing
 		break;
 	}
 }

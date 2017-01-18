@@ -14,7 +14,6 @@ class Scene
 	int tab[101][2]; // tablica zawieraj¹ce wspó³rzêdne bloku food oraz segmentów wê¿a
 	string fSign;
 	string sSign;
-	//string **state = new string* [x];
 	string state[20][20]; //tablica zawieraj¹ca symbole dla ka¿dego z pól
 public:
 	Scene(int width, int height);
@@ -22,6 +21,7 @@ public:
 	void updateScene(Food &myFood, Snake &mySnake);
 	int getWidth();
 	int getHeight();
+	int getArea();
 	~Scene();
 };
 
