@@ -2,10 +2,9 @@
 
 Snake::course Ssystem::whichButton()
 {
-		Snake::course newCourse;
-		bool end = false;
-		//while (end == false)
-		//{
+	Snake::course newCourse;
+
+	if (_kbhit()) {
 		unsigned char znak = _getch();
 
 		switch (znak) {
@@ -15,34 +14,33 @@ Snake::course Ssystem::whichButton()
 			switch (znak) {
 			case 72: //UP
 				newCourse = Snake::North;
-				//cout << "N";
 				break;
 			case 80: //DOWN
 				newCourse = Snake::South;
-				//cout << "S";
 				break;
 			case 77: //RIGHT
 				newCourse = Snake::East;
-				//cout << "E";
 				break;
 			case 75: //LEFT
 				newCourse = Snake::West;
-				//cout << "W";
 				break;
 			}
 			znak = 0;
 			break;
-			//case 13: //ENTER
-			//break;
-			//case 27: //ESC
-			//end = true;
-			//break;
+		case 27: //ESC
+			newCourse = Snake::Other;
+			setContinueGame(); //push "y" if you want to continue game
+			break;
 		default:
 			newCourse = Snake::Other;
 			break;
 		}
-		//}
-		return newCourse;
+	}
+	else {
+		newCourse = Snake::Last;
+	}
+
+	return newCourse;
 }
 
 void Ssystem::createFile(Player newPlayer)
@@ -85,26 +83,71 @@ void Ssystem::showResults()
 		}
 		else cout << "Error! Unable to open file!" << endl;
 	}
+	else if(yesno=="n"){	}
+	else {
+		showResults();
+	}
 }
 
-string Ssystem::newGame()
+void Ssystem::setNextGame()
 {
 	string yn;
-	cout << "Do you want play one more time? (y/n):";
+	cout << "Do you want to play one more time? (y/n):";
 	cin >> yn;
 
 	if (yn == "y")
 	{
-		return "y";
+		nextGame=true;
 	}
-	else
+	else if (yn == "n")
 	{
-		return "n";
+		nextGame = false;
+	}
+	else {
+		setNextGame();
 	}
 }
 
-Ssystem::Ssystem()
+void Ssystem::setContinueGame()
 {
+	string yn;
+	cout << "Do you want to end the game? (y/n):";
+	cin >> yn;
+
+	if (yn == "y")
+	{
+		continueGame=false;
+	}
+	else if (yn == "n")
+	{
+		continueGame=true;
+	}
+	else {
+		setContinueGame();
+	}
+	
+}
+
+bool Ssystem::getNextGame()
+{
+	return nextGame;
+}
+
+bool Ssystem::getContinueGame()
+{
+	return continueGame;
+}
+
+void Ssystem::refresh()
+{
+	Sleep(1000/speed);
+}
+
+Ssystem::Ssystem(int sspeed)
+{
+	nextGame=true;
+	continueGame=true;
+	speed = sspeed;
 }
 
 

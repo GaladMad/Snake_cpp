@@ -5,7 +5,7 @@ Snake::Snake(Scene Background)
 	maxX = Background.getHeight();
 	maxY = Background.getWidth();
 
-	//Block *segments = new Block[maxX*maxY];
+	segments = new Block[maxX*maxY];
 
 	Block segment0(0, 2);
 	Block segment1(0, 1);
@@ -26,12 +26,23 @@ string Snake::getSign() {
 
 void Snake::setCourse(course newCourse)
 {
-	snakeCourse = newCourse;
+	if (newCourse == Last) {
+		snakeCourse = snakeLastCourse; // if another button was pushed, set do not change the course
+	}
+	else {
+		snakeCourse = newCourse;
+	}
+	
 }
 
 Snake::course Snake::getCourse()
 {
 	return snakeCourse;
+}
+
+Snake::course Snake::getLastCourse()
+{
+	return snakeLastCourse;
 }
 
 int Snake::getLength()
@@ -140,7 +151,7 @@ void Snake::moveSnake()
 		}
 		break;
 
-	default: //if course is other, do nothing
+	default: //if course is other, do not nothing
 		break;
 	}
 }
@@ -148,4 +159,5 @@ void Snake::moveSnake()
 
 Snake::~Snake()
 {
+	delete[] segments;
 }

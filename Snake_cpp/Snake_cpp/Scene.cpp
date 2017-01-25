@@ -4,11 +4,16 @@ Scene::Scene(int width, int height)
 {
 	x = width;
 	y = height;
+	tab = new int[x*y+1][2];
+
+	state = new string*[x];
+	for (int i = 0; i < x; i++) {
+		state[i] = new string[y];
+	}
 }
 
 void Scene::show() {
 	for (int i = 0; i < x; i++) {
-		//state[i] = new string[y];
 		for (int j = 0; j < y; j++) {
 			cout << state[i][j];
 		}
@@ -56,4 +61,9 @@ int Scene::getArea()
 Scene::~Scene()
 {
 	system("cls");
+	delete[] tab;
+	/*for (int i = 0; i < x; i++) {
+		delete[] state[i];
+	}
+	delete[] state;*/
 }

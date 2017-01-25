@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <windows.h>
 #include <conio.h>
 #include "Snake.h"
 #include "Player.h"
@@ -9,12 +10,19 @@ using namespace std;
 
 class Ssystem
 {
+	bool nextGame;
+	bool continueGame;
+	int speed;
 public:
-	Ssystem();
+	Ssystem(int sspeed);
 	Snake::course whichButton();
 	void createFile(Player newPlayer);
 	void showResults();
-	string newGame();
+	void setNextGame();
+	void setContinueGame();
+	bool getNextGame();
+	bool getContinueGame();
+	void refresh();
 	~Ssystem();
 };
 

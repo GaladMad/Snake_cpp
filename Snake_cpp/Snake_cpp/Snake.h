@@ -11,8 +11,7 @@ class Scene;
 
 class Snake
 {
-	Block segments[100];
-	//Block *segments;// [100]; //table with segents of snake
+	Block *segments; //table with segents of snake
 	string snakeSign = " o";
 	int snakeLength;
 	Block lastSegment;
@@ -24,6 +23,7 @@ public:
 		South,
 		East,
 		West,
+		Last,
 		Other
 	};
 private:
@@ -36,6 +36,7 @@ public:
 	string getSign();
 	void setCourse(course newCourse);
 	course getCourse();
+	course getLastCourse();
 	int getLength();
 	Block* getSegments();
 	bool ifAlive();

@@ -11,14 +11,14 @@ using namespace std;
 
 int main() {
 	srand(static_cast<unsigned int> (time(NULL)));
-	string nextGame = "y";
+	Ssystem mySystem(12);
 
-	while (nextGame == "y")
+	while (mySystem.getNextGame())
 	{
-		Scene Background(10, 10);
+		Scene Background(10, 10); //this is size of scene
 		Snake mySnake(Background);
 		Food myFood(Background, mySnake);
-		Ssystem mySystem;
+		
 		Player newPlayer;
 
 		system("cls");
@@ -27,9 +27,9 @@ int main() {
 		cin >> word;
 		newPlayer.setName(word);
 
-		while (mySnake.ifAlive()) {
+		while (mySnake.ifAlive() && mySystem.getContinueGame()) {
 			system("cls");
-			cout << "\t>>>SNAKE<<<" << endl;
+			cout << ">>>SNAKE<<<" << endl;
 			Background.updateScene(myFood, mySnake);
 			Background.show();
 			//cout << myFood.getX() << endl;
@@ -39,6 +39,7 @@ int main() {
 			mySnake.setCourse(mySystem.whichButton());
 			mySnake.moveSnake();
 			myFood.randLocation(mySnake.eatAndGrow(myFood), mySnake); // if snake eat a food, food change coordinate, and snake grown
+			mySystem.refresh();
 		}
 
 		newPlayer.setPoints(mySnake.getLength());
@@ -46,10 +47,10 @@ int main() {
 		cout << "Your results is " << newPlayer.getPoints() << endl;
 		mySystem.showResults();
 
-		nextGame = mySystem.newGame(); //if you want, you can play one more time
+		mySystem.setNextGame(); //if you want, you can play one more time
 	}
 
-	system("PAUSE");
+	//system("PAUSE");
 	return 0;
 }
 

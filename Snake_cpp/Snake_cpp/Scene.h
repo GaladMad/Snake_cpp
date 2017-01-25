@@ -11,10 +11,13 @@ using namespace std;
 class Scene
 {
 	int x, y;
-	int tab[101][2]; // tablica zawieraj¹ce wspó³rzêdne bloku food oraz segmentów wê¿a
 	string fSign;
 	string sSign;
-	string state[20][20]; //tablica zawieraj¹ca symbole dla ka¿dego z pól
+	//int tab[101][2]; // table with coordination block of food and bloks of snake
+	int(*tab)[2];
+	//string state[20][20]; //table with sings of every blocks
+	string **state;
+	
 public:
 	Scene(int width, int height);
 	void show();

@@ -6,7 +6,7 @@ using namespace std;
 class Block
 {
 	int b_x, b_y;
-	string blockSign="  ";
+	string blockSign;
 
 public:
 	Block();
