@@ -15,7 +15,7 @@ int main() {
 
 	while (mySystem.getNextGame())
 	{
-		Scene Background(10, 10); //this is size of scene
+		Scene Background(10, 10); //this is the size of the scene
 		Snake mySnake(Background);
 		Food myFood(Background, mySnake);
 		
@@ -32,25 +32,21 @@ int main() {
 			cout << ">>>SNAKE<<<" << endl;
 			Background.updateScene(myFood, mySnake);
 			Background.show();
-			//cout << myFood.getX() << endl;
-			//cout << myFood.getY() << endl;
-			//Sleep(500);
 
 			mySnake.setCourse(mySystem.whichButton());
 			mySnake.moveSnake();
-			myFood.randLocation(mySnake.eatAndGrow(myFood), mySnake); // if snake eat a food, food change coordinate, and snake grown
+			myFood.randLocation(mySnake.eatAndGrow(myFood), mySnake); // if snake eats food, the food coordinates change, and the snake grows
 			mySystem.refresh();
 		}
 
 		newPlayer.setPoints(mySnake.getLength());
 		mySystem.createFile(newPlayer);
-		cout << "Your results is " << newPlayer.getPoints() << endl;
+		cout << "Your score is " << newPlayer.getPoints() << endl;
 		mySystem.showResults();
 
-		mySystem.setNextGame(); //if you want, you can play one more time
+		mySystem.setNextGame(); //if you want you can play one more time
 	}
 
-	//system("PAUSE");
 	return 0;
 }
 

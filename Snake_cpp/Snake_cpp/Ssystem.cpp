@@ -29,7 +29,7 @@ Snake::course Ssystem::whichButton()
 			break;
 		case 27: //ESC
 			newCourse = Snake::Other;
-			setContinueGame(); //push "y" if you want to continue game
+			setContinueGame(); //push "y" if you want to continue the game
 			break;
 		default:
 			newCourse = Snake::Other;
@@ -46,7 +46,7 @@ Snake::course Ssystem::whichButton()
 void Ssystem::createFile(Player newPlayer)
 {
 	fstream plik;
-	plik.open("Results.txt", ios::app);
+	plik.open("Scores.txt", ios::app);
 	plik << newPlayer.getName() << endl;
 	plik << newPlayer.getPoints() << endl;
 	plik.close();
@@ -55,22 +55,22 @@ void Ssystem::createFile(Player newPlayer)
 void Ssystem::showResults()
 {
 	string yesno;
-	cout << "Do you want to see other results (y/n):";
+	cout << "Do you want to see other scores? (y/n):";
 	cin >> yesno;
 
 	if (yesno == "y")
 	{
 		std::fstream plik;
-		plik.open("Results.txt", ios::in);
+		plik.open("Scores.txt", ios::in);
 		if (plik.good())
 		{
 			int line = 1;
 			string napis;
-			cout << "\tPlayer\tResult" << endl;
+			cout << "\tPlayer\tScore" << endl;
 			while (!plik.eof())
 			{
 				getline(plik, napis);
-				if (napis != "") //if next line is white sign system not write more results
+				if (napis != "") //if the next line is a white sign system does not write more results
 				{
 					cout << line << ".\t";
 					cout << napis << "\t";
@@ -81,7 +81,7 @@ void Ssystem::showResults()
 			}
 			plik.close();
 		}
-		else cout << "Error! Unable to open file!" << endl;
+		else cout << "Error! Unable to open the file!" << endl;
 	}
 	else if(yesno=="n"){	}
 	else {

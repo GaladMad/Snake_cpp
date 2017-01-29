@@ -13,10 +13,8 @@ class Scene
 	int x, y;
 	string fSign;
 	string sSign;
-	//int tab[101][2]; // table with coordination block of food and bloks of snake
-	int(*tab)[2];
-	//string state[20][20]; //table with sings of every blocks
-	string **state;
+	int(*coordinationOfFoodAndSnake)[2]; // table with coordination block of food and blocks of snake
+	string **signsOfEveryBlock; //table with signs of every block
 	
 public:
 	Scene(int width, int height);

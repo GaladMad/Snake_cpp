@@ -4,44 +4,44 @@ Scene::Scene(int width, int height)
 {
 	x = width;
 	y = height;
-	tab = new int[x*y+1][2];
+	coordinationOfFoodAndSnake = new int[x*y+1][2];
 
-	state = new string*[x];
+	signsOfEveryBlock = new string*[x];
 	for (int i = 0; i < x; i++) {
-		state[i] = new string[y];
+		signsOfEveryBlock[i] = new string[y];
 	}
 }
 
 void Scene::show() {
 	for (int i = 0; i < x; i++) {
 		for (int j = 0; j < y; j++) {
-			cout << state[i][j];
+			cout << signsOfEveryBlock[i][j];
 		}
 		cout << endl;
 	}
 }
 
 void Scene::updateScene(Food &myFood, Snake &mySnake) {
-	tab[0][0] = myFood.getX();
-	tab[0][1] = myFood.getY();
+	coordinationOfFoodAndSnake[0][0] = myFood.getX();
+	coordinationOfFoodAndSnake[0][1] = myFood.getY();
 	fSign = myFood.getSign();
 	sSign = mySnake.getSign();
 
 	for (int i = 0; i < mySnake.getLength(); i++) {
-		tab[i + 1][0] = (mySnake.getSegments())[i].getX();
-		tab[i + 1][1] = (mySnake.getSegments())[i].getY();
+		coordinationOfFoodAndSnake[i + 1][0] = (mySnake.getSegments())[i].getX();
+		coordinationOfFoodAndSnake[i + 1][1] = (mySnake.getSegments())[i].getY();
 	}
 
 	for (int i = 0; i < x; i++) {
 		for (int j = 0; j < y; j++) {
-				state[i][j] = " ."; /////////////////////sign
+				signsOfEveryBlock[i][j] = " .";
 		}
 	}
 
-	state[tab[0][0]][tab[0][1]] = fSign;
+	signsOfEveryBlock[coordinationOfFoodAndSnake[0][0]][coordinationOfFoodAndSnake[0][1]] = fSign;
 
 	for (int i = 0; i < mySnake.getLength(); i++) {
-		state[tab[i+1][0]][tab[i+1][1]] = sSign;
+		signsOfEveryBlock[coordinationOfFoodAndSnake[i+1][0]][coordinationOfFoodAndSnake[i+1][1]] = sSign;
 	}
 }
 
@@ -61,7 +61,7 @@ int Scene::getArea()
 Scene::~Scene()
 {
 	system("cls");
-	delete[] tab;
+	delete[] coordinationOfFoodAndSnake;
 	/*for (int i = 0; i < x; i++) {
 		delete[] state[i];
 	}

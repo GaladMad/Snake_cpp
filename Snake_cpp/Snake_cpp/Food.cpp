@@ -1,13 +1,12 @@
 #include "Food.h"
 
 
-int ** Food::possiblePlace(Snake & mySnake) //TO CORRECT
+int ** Food::possiblePlace(Snake & mySnake)
 {
-	//int lengthOfTable = Background.getArea() - mySnake.getLength();
-	int **table = new int*[maxX * maxY - mySnake.getLength()];
+	int **tableOfPossiblePlace = new int*[maxX * maxY - mySnake.getLength()];
 
 	for (int i = 0, k=0; i < maxX; i++) {
-		for (int j = 0; j < maxY; j++) { // use two loop because scene has got a two dimension
+		for (int j = 0; j < maxY; j++) { // two loops used because scene has got two dimensions
 			bool flag = true;
 				for (int s = 0; s < mySnake.getLength(); s++) {
 
@@ -16,17 +15,17 @@ int ** Food::possiblePlace(Snake & mySnake) //TO CORRECT
 					}
 				}
 			///////////////////////
-			//if any segments of snake or old food have a [i,j] coordinates, set this numbers to table
+			//if any segment of snake or old food has [i,j] coordinates, set these numbers into table
 			if (flag) {
-				table[k] = new int[2];
-				table[k][0] = i;
-				table[k][1] = j;
+				tableOfPossiblePlace[k] = new int[2];
+				tableOfPossiblePlace[k][0] = i;
+				tableOfPossiblePlace[k][1] = j;
 				k++;
 			}
 		}
 		
 	}
-	return table;
+	return tableOfPossiblePlace;
 }
 
 Food::Food(Scene &Background, Snake &mySnake)

@@ -11,7 +11,7 @@ class Scene;
 
 class Snake
 {
-	Block *segments; //table with segents of snake
+	Block *segments; //table with segments of snake
 	string snakeSign = " o";
 	int snakeLength;
 	Block lastSegment;
@@ -27,7 +27,7 @@ public:
 		Other
 	};
 private:
-	course snakeCourse; //course wher snake move
+	course snakeCourse; //course where snake moves
 	course snakeLastCourse;
 	void moveBodyOfSnake();
 
